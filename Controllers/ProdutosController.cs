@@ -6,32 +6,19 @@ namespace GestaodePedidosAPI.Controllers;
 [ApiController]
 [Route("api/[controller]")]
 
-public class ProdutosController: ControllerBase
+public class ProdutosController : ControllerBase;
 {
+    private readonly ProdutoService _produtoService;
+
+    public ProdutosController(ProdutoService produtoService)
+    {
+        _produtoService = produtoService;
+    }
+
     [HttpGet]
     public IActionResult GetProdutos()
     {
-        var produtos = new List<Produto>
-        {
-            new Produto
-            {
-                Id = 1,
-                Nome = "Coca-Cola 350ml",
-                Preco = 6.00m
-            },
-            new Produto
-            {
-                Id = 2,
-                Nome = "Guarana Antartica 350ml",
-                Preco = 5.00m
-            },
-            new Produto
-            {
-                Id = 3,
-                Nome = "Suco de Laranja",
-                Preco = 10.00m
-            }
-        };
+        var produtos = _produtoService.GetProdutos();
 
         return Ok(produtos);
     }

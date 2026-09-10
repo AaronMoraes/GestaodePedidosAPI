@@ -1,8 +1,14 @@
 using GestaodePedidosAPI.Services;
+using Microsoft.EntityFrameworkCore;
+using GestaodePedidosAPI.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
+
+builder.Services.AddDbContext<AppDbContext> (options =>
+    options.UseSqlite("Data Source=gestaodepedidos.db"));
+
 builder.Services.AddScoped<ProdutoService>();
 
 var app = builder.Build();

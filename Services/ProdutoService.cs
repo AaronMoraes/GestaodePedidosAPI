@@ -1,31 +1,75 @@
+using GestaodePedidosAPI.Data;
 using GestaodePedidosAPI.Models;
+using Microsoft.EntityFrameworkCore;
+using GestaodePedidosAPI.DTOs;
 
 namespace GestaodePedidosAPI.Services;
 
 public class ProdutoService
 {
-    public List<Produto> GetProdutos()
+    private readonly AppDbContext _context;
+
+    public ProdutoService(AppDbContext context)
     {
-        return new List<Produto>
-        {
-            new Produto
-            {
-                Id = 1,
-                Nome = "Coca-Cola 350ml",
-                Preco = 6.00m
-            },
-            new Produto
-            {
-                Id = 2,
-                Nome = "Guaraná Antarctica 350ml",
-                Preco = 5.00m
-            },
-            new Produto
-            {
-                Id = 3,
-                Nome = "Suco de Laranja 500ml",
-                Preco = 10.00m
-            }
-        };
+        _context = context;
     }
-}
+
+    public async Task<List<Produto>> GetProdutos()
+    {
+        return await _context.Produtos.ToListAsync();
+    }
+
+    public async Task<Produto?> GetProdutoPorId(int id)
+    {
+        return await _context.Produtos.FindAsync(id);
+    }
+
+    public async Task<Produto> CriarProduto(ProdutoDto produtoDto)
+    {
+        var produto = new Produto
+        {
+            Nome = produtoDto.Nome,
+            Preco = produtoDto.Preco
+        };
+
+        _context.Produtos.Add(produto);
+
+        await _context.SaveChangesAsync();
+
+        return produto;
+    }
+
+    public async Task<Produto?> AtualizarProduto(int id, ProdutoDto produtoDto)
+    {
+        var produto = await _context.Produtos.FindAsync(id);
+
+        if (produto == null)
+        {
+            return null;
+        }
+
+        produto.Nome = produtoDto.Nome;
+        produto.Preco = produtoDto.Preco;
+
+        await _context.SaveChangesAsync();
+
+        return produto;
+    }
+
+    public async Task<bool> ExcluirProduto(int id)
+    {
+        var produto = await _context.Produtos.FindAsync(id);
+
+        if (produto == null)
+        {
+            return false;
+        }
+
+        _context.Produtos.Remove(produto);
+
+        await _context.SaveChangesAsync();
+
+        return true;
+    }
+
+} 

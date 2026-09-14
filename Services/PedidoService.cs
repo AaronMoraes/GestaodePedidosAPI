@@ -32,6 +32,9 @@ public class PedidoService
 
     public async Task<Pedido> Criar(CriarPedidoDto dto)
     {
+        if (dto.Itens == null || dto.Itens.Count == 0)
+            throw new ArgumentException ("O pedido deve possuir pelo menos um item. ");
+            
         var pedido = new Pedido
         {
             Data = DateTime.Now,
@@ -40,6 +43,17 @@ public class PedidoService
 
         foreach (var itemDto in dto.Itens)
         {
+            var produtoExiste = await  _context.Produtos
+                .AnyAsync(p => p.Id == itemDto.ProdutoId);
+            if (!produtoExiste)
+                throw new ArgumentException($"Produto com ID {itemDto.ProdutoId} nao existe. ");
+            
+            if (itemDto.Quantidade <= 0)
+                throw new ArgumentException("A quantidade deve ser maior que zero. ");
+            
+            if (itemDto.Preco < 0)
+                throw new ArgumentException("O preco nao pode ser negativo. ");
+
             var item = new ItemPedido
             {
                 ProdutoId = itemDto.ProdutoId,

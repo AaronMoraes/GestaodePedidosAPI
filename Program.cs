@@ -1,6 +1,7 @@
 using GestaodePedidosAPI.Services;
 using Microsoft.EntityFrameworkCore;
 using GestaodePedidosAPI.Data;
+using GestaodePedidosAPI.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +14,8 @@ builder.Services.AddScoped<ProdutoService>();
 builder.Services.AddScoped<PedidoService>();
 
 var app = builder.Build();
+
+app.UseMiddleware<ExceptionMiddleware>();
 
 app.MapControllers();
 

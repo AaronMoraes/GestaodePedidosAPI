@@ -10,6 +10,7 @@ builder.Services.AddDbContext<AppDbContext> (options =>
     options.UseSqlite("Data Source=gestaodepedidos.db"));
 
 builder.Services.AddScoped<ProdutoService>();
+builder.Services.AddScoped<PedidoService>();
 
 var app = builder.Build();
 

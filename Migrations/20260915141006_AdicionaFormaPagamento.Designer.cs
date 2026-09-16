@@ -3,6 +3,7 @@ using System;
 using GestaodePedidosAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GestaodePedidosAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260915141006_AdicionaFormaPagamento")]
+    partial class AdicionaFormaPagamento
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.20");
@@ -82,92 +85,6 @@ namespace GestaodePedidosAPI.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Produtos");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 13,
-                            Nome = "Coca-Cola 350ml",
-                            Preco = 6.00m
-                        },
-                        new
-                        {
-                            Id = 14,
-                            Nome = "Coca-Cola 1L",
-                            Preco = 10.00m
-                        },
-                        new
-                        {
-                            Id = 15,
-                            Nome = "Coca-Cola 2L",
-                            Preco = 15.00m
-                        },
-                        new
-                        {
-                            Id = 16,
-                            Nome = "Guaraná Antarctica 350mL",
-                            Preco = 5.00m
-                        },
-                        new
-                        {
-                            Id = 17,
-                            Nome = "Sprite 350mL",
-                            Preco = 5.00m
-                        },
-                        new
-                        {
-                            Id = 18,
-                            Nome = "Fanta Laranja 350ml",
-                            Preco = 5.00m
-                        },
-                        new
-                        {
-                            Id = 19,
-                            Nome = "Fanta Uva 350ml",
-                            Preco = 5.00m
-                        },
-                        new
-                        {
-                            Id = 20,
-                            Nome = "Suco de Laranja 500ml",
-                            Preco = 10.00m
-                        },
-                        new
-                        {
-                            Id = 21,
-                            Nome = "Suco de Uva 500ml",
-                            Preco = 12.00m
-                        },
-                        new
-                        {
-                            Id = 30,
-                            Nome = "Combo Família",
-                            Preco = 80.00m
-                        },
-                        new
-                        {
-                            Id = 31,
-                            Nome = "Dogão no Prato",
-                            Preco = 35.00m
-                        },
-                        new
-                        {
-                            Id = 32,
-                            Nome = "Combo Casal",
-                            Preco = 45.00m
-                        },
-                        new
-                        {
-                            Id = 33,
-                            Nome = "Combo Kids",
-                            Preco = 35.00m
-                        },
-                        new
-                        {
-                            Id = 34,
-                            Nome = "Combo Bacon",
-                            Preco = 55.00m
-                        });
                 });
 
             modelBuilder.Entity("GestaodePedidosAPI.Models.ItemPedido", b =>

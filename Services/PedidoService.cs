@@ -34,31 +34,36 @@ public class PedidoService
     {
         if (dto.Itens == null || dto.Itens.Count == 0)
             throw new ArgumentException ("O pedido deve possuir pelo menos um item. ");
+        
+        if(dto.FormaPagamento != "pix" && dto.FormaPagamento != "cartao")
+            throw new ArgumentException("Forma de Pagamento inválida. ");
+
+        if(dto.Status != "Pendente")
+            throw new ArgumentException("Status do pedido inválido. ");
             
         var pedido = new Pedido
         {
             Data = DateTime.Now,
-            Status = dto.Status
+            Status = dto.Status,
+            FormaPagamento = dto.FormaPagamento
         };
 
         foreach (var itemDto in dto.Itens)
         {
-            var produtoExiste = await  _context.Produtos
-                .AnyAsync(p => p.Id == itemDto.ProdutoId);
-            if (!produtoExiste)
+            var produto = await  _context.Produtos
+                .FirstOrDefaultAsync(p => p.Id == itemDto.ProdutoId);
+
+            if (produto == null)
                 throw new ArgumentException($"Produto com ID {itemDto.ProdutoId} nao existe. ");
             
             if (itemDto.Quantidade <= 0)
                 throw new ArgumentException("A quantidade deve ser maior que zero. ");
-            
-            if (itemDto.Preco < 0)
-                throw new ArgumentException("O preco nao pode ser negativo. ");
 
             var item = new ItemPedido
             {
                 ProdutoId = itemDto.ProdutoId,
                 Quantidade = itemDto.Quantidade,
-                Preco = itemDto.Preco
+                Preco = produto.Preco  
             };
 
             pedido.Itens.Add(item);
@@ -68,6 +73,22 @@ public class PedidoService
         await _context.SaveChangesAsync();
 
         return pedido;
+    }
+
+    public async Task<bool> Excluir(int id)
+    {
+        var pedido = await _context.Pedidos
+            .Include(p => p.Itens)
+            .FirstOrDefaultAsync(p => p.Id == id);
+
+        if (pedido == null)
+            return false;
+
+        _context.Pedidos.Remove(pedido);
+
+        await _context.SaveChangesAsync();
+
+        return true;
     }
 
 

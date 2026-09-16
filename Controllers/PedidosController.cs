@@ -47,5 +47,16 @@ public class PedidosController : ControllerBase
             pedido
         );
     }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> Excluir(int id)
+    {
+        var excluido = await _service.Excluir(id);
+
+        if(!excluido)
+            return NotFound();
+
+        return NoContent();
+    }
 }
 

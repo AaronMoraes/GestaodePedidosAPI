@@ -3,6 +3,7 @@ using System;
 using GestaodePedidosAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GestaodePedidosAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260917144304_AdicionaBebidasRestantes")]
+    partial class AdicionaBebidasRestantes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.20");
@@ -191,24 +194,6 @@ namespace GestaodePedidosAPI.Migrations
                             Id = 34,
                             Nome = "Combo Bacon",
                             Preco = 55.00m
-                        },
-                        new
-                        {
-                            Id = 35,
-                            Nome = "X-Salada + Coca-Cola 350ml",
-                            Preco = 19.90m
-                        },
-                        new
-                        {
-                            Id = 36,
-                            Nome = "X-Bacon + Sprite 350ml",
-                            Preco = 21.90m
-                        },
-                        new
-                        {
-                            Id = 37,
-                            Nome = "X-Tudo + Guaraná Antarctica 350ml",
-                            Preco = 27.90m
                         });
                 });
 

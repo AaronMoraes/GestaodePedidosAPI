@@ -28,6 +28,17 @@ public class AppDbContext : DbContext
 
         //HasData fala para o EF que quando o banco for criado através das migrations, esses dados tem que existir.
         modelBuilder.Entity<Produto>().HasData(
+
+            new Produto { Id = 1, Nome = "X-Burguer", Preco = 10.00m },
+            new Produto { Id = 2, Nome = "X-Salada", Preco = 15.00m },
+            new Produto { Id = 3, Nome = "X-Egg", Preco = 17.00m },
+            new Produto { Id = 4, Nome = "X-Bacon", Preco = 18.00m },
+            new Produto { Id = 5, Nome = "X-Frango", Preco = 20.00m },
+            new Produto { Id = 6, Nome = "X-Tudo", Preco = 25.00m },
+            new Produto { Id = 7, Nome = "X-Tudo Duplo", Preco = 25.00m },
+            new Produto { Id = 8, Nome = "X-Contra Filé", Preco = 30.00m },
+
+
             new Produto { Id = 13, Nome = "Coca-Cola 350ml", Preco = 6.00m },
             new Produto { Id = 14, Nome = "Coca-Cola 1L", Preco = 10.00m },
             new Produto { Id = 15, Nome = "Coca-Cola 2L", Preco = 15.00m },
@@ -47,7 +58,7 @@ public class AppDbContext : DbContext
             new Produto { Id = 32, Nome = "Combo Casal", Preco = 45.00m },
             new Produto { Id = 33, Nome = "Combo Kids", Preco = 35.00m },
             new Produto { Id = 34, Nome = "Combo Bacon", Preco = 55.00m },
-            
+
             new Produto { Id = 35, Nome = "X-Salada + Coca-Cola 350ml", Preco = 19.90m },
             new Produto { Id = 36, Nome = "X-Bacon + Sprite 350ml", Preco = 21.90m },
             new Produto { Id = 37, Nome = "X-Tudo + Guaraná Antarctica 350ml", Preco = 27.90m }

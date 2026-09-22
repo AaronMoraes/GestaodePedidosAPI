@@ -26,9 +26,11 @@ public class ProdutoService
 
     public async Task<Produto> CriarProduto(ProdutoDto produtoDto)
     {
+        ValidarProduto(produtoDto);
+
         var produto = new Produto
         {
-            Nome = produtoDto.Nome,
+            Nome = produtoDto.Nome.Trim(),
             Preco = produtoDto.Preco
         };
 
@@ -48,7 +50,9 @@ public class ProdutoService
             return null;
         }
 
-        produto.Nome = produtoDto.Nome;
+        ValidarProduto(produtoDto);
+
+        produto.Nome = produtoDto.Nome.Trim();
         produto.Preco = produtoDto.Preco;
 
         await _context.SaveChangesAsync();
@@ -72,4 +76,12 @@ public class ProdutoService
         return true;
     }
 
-} 
+    private static void ValidarProduto(ProdutoDto produtoDto)
+    {
+        if (string.IsNullOrWhiteSpace(produtoDto.Nome))
+            throw new ArgumentException("O nome do produto é obrigatório.");
+
+        if (produtoDto.Preco < 0)
+            throw new ArgumentException("O preço do produto não pode ser negativo.");
+    }
+}

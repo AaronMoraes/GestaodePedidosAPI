@@ -38,7 +38,7 @@ public class ExceptionMiddleware
 
             var resposta = new
             {
-                mensagem = "Ocorreu um erro interno no servidor."
+                message = "Ocorreu um erro interno no servidor."
             };
 
             await context.Response.WriteAsync(

@@ -2,6 +2,7 @@ using GestaodePedidosAPI.Models;
 using GestaodePedidosAPI.Services;
 using GestaodePedidosAPI.DTOs;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GestaodePedidosAPI.Controllers;
 
@@ -18,6 +19,7 @@ public class PedidosController : ControllerBase
     }
 
     [HttpGet]
+    [Authorize]
     public async Task<ActionResult<List<Pedido>>> ListarTodos()
     {
         var pedidos = await _service.ListarTodos();
@@ -26,6 +28,7 @@ public class PedidosController : ControllerBase
     }
 
     [HttpGet("{id}")]
+    [Authorize]
     public async Task<ActionResult<Pedido>> BuscarPorId (int id)
     {
         var pedido = await _service.BuscarPorId(id);
@@ -49,6 +52,7 @@ public class PedidosController : ControllerBase
     }
 
     [HttpDelete("{id}")]
+    [Authorize]
     public async Task<IActionResult> Excluir(int id)
     {
         var excluido = await _service.Excluir(id);

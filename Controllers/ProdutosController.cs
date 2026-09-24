@@ -2,6 +2,7 @@ using GestaodePedidosAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using GestaodePedidosAPI.Services;
 using GestaodePedidosAPI.DTOs;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GestaodePedidosAPI.Controllers;
 
@@ -51,6 +52,7 @@ public class ProdutosController : ControllerBase
     }
 
     [HttpPut("{id}")]
+    [Authorize]
     public async Task<IActionResult> AtualizarProduto(int id, ProdutoDto produtoDto)
     {
         var produto = await _produtoService.AtualizarProduto(id, produtoDto);
@@ -64,6 +66,7 @@ public class ProdutosController : ControllerBase
     }
 
     [HttpDelete("{id}")]
+    [Authorize]
     public async Task<IActionResult> ExcluirProduto (int id)
     {
         var excluido = await _produtoService.ExcluirProduto(id);

@@ -3,6 +3,7 @@ using System;
 using GestaodePedidosAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GestaodePedidosAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260924121458_AdicionaAdmin")]
+    partial class AdicionaAdmin
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.20");
@@ -103,54 +106,6 @@ namespace GestaodePedidosAPI.Migrations
                     b.ToTable("Produtos");
 
                     b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Nome = "X-Burguer",
-                            Preco = 10.00m
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Nome = "X-Salada",
-                            Preco = 15.00m
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Nome = "X-Egg",
-                            Preco = 17.00m
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Nome = "X-Bacon",
-                            Preco = 18.00m
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Nome = "X-Frango",
-                            Preco = 20.00m
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Nome = "X-Tudo",
-                            Preco = 25.00m
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Nome = "X-Tudo Duplo",
-                            Preco = 25.00m
-                        },
-                        new
-                        {
-                            Id = 8,
-                            Nome = "X-Contra Filé",
-                            Preco = 30.00m
-                        },
                         new
                         {
                             Id = 13,
